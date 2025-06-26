@@ -66,6 +66,7 @@ jobs:
         setup-command: ''
         command: cat .github/workflows/package_npm.yml | grep npm
         timeout: 10
+        max-score: 4
     - name: t7
       id: t7
       uses: classroom-resources/autograding-command-grader@v1
