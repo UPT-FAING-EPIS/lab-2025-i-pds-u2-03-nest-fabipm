@@ -1,0 +1,92 @@
+name: Test, Scan and Publish NPM Packages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-scan-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    strategy:
+      matrix:
+        app: [atm, payment]
+
+    steps:
+      # --- Paso 1: Checkout ---
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Necesario para SonarCloud
+
+      # --- Paso 2: Setup Node.js ---
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '21.x'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@UPT-FAING-EPIS'
+
+      # --- Paso 3: Instalar dependencias y probar ---
+      - name: Install dependencies for ${{ matrix.app }}
+        working-directory: ./${{ matrix.app }}
+        run: npm ci
+
+      - name: Run tests for ${{ matrix.app }}
+        working-directory: ./${{ matrix.app }}
+        run: npm test -- --coverage
+
+      # --- Paso 4: Análisis SonarCloud ---
+      - name: SonarCloud Scan for ${{ matrix.app }}
+        uses: SonarSource/sonarqube-scan-action@v5.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.organization=fabipm
+            -Dsonar.projectKey=fabipm_${{ matrix.app }}-poma
+            -Dsonar.projectName=${{ matrix.app }}_poma
+            -Dsonar.projectVersion=1.0
+            -Dsonar.sources=./${{ matrix.app }}/libs/domain/src
+            -Dsonar.javascript.lcov.reportPaths=./${{ matrix.app }}/coverage/lcov.info
+            -Dsonar.typescript.lcov.reportPaths=./${{ matrix.app }}/coverage/lcov.info
+            -Dsonar.sourceEncoding=UTF-8
+            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.scm.provider=git
+            -Dsonar.branch.name=main
+
+      # --- Paso 5: Construir, versionar y publicar ---
+      - name: Build and Publish ${{ matrix.app }}
+        working-directory: ./${{ matrix.app }}
+        run: |
+          # Construir la librería
+          npm run build domain
+
+          # Copiar el package.json a la carpeta de distribución
+          cp ./package.json ./dist/libs/domain/package.json
+
+          # Entrar a la carpeta de distribución para publicar
+          cd ./dist/libs/domain
+
+          # Establecer el nombre del paquete con el scope de la organización
+          npm pkg set name="@UPT-FAING-EPIS/${{ matrix.app }}_poma"
+          
+          # Asegurar que el registro es el de GitHub
+          npm pkg set publishConfig.registry="https://npm.pkg.github.com/"
+          
+          # Eliminar la propiedad "private" si existe
+          npm pkg delete private
+
+          # Crear la versión con el número de build
+          BASE_VERSION=$(node -p "require('./package.json').version")
+          npm version "${BASE_VERSION}-build.${{ github.run_number }}" --no-git-tag-version
+
+          # Publicar el paquete
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
