@@ -123,6 +123,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Represents a bank account with basic operations like withdraw and deposit.
+This class manages account balance and enforces business rules for transactions.</p>
+
+            </p>
 
 
 
@@ -209,10 +217,20 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="4" class="link-to-prism">libs/domain/src/account.ts:4</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">libs/domain/src/account.ts:49</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Current balance available in the account.
+Represents the amount of money currently available for transactions.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">```typescript
+const account = new Account();
+account.AccountBalance = 1000.50;
+console.log(`Balance: $${account.AccountBalance}`);</code></pre></div><b>Example :</b><div><pre class="line-numbers"><code class="language-none"></code></pre></div></div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -236,10 +254,19 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="3" class="link-to-prism">libs/domain/src/account.ts:3</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">libs/domain/src/account.ts:34</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Unique identifier for the bank account.
+This number is used to identify the account in the banking system.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">```typescript
+const account = new Account();
+account.AccountNumber = 123456789;</code></pre></div><b>Example :</b><div><pre class="line-numbers"><code class="language-none"></code></pre></div></div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -268,10 +295,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="2" class="link-to-prism">libs/domain/src/account.ts:2</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">libs/domain/src/account.ts:20</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Maximum amount allowed for a single deposit transaction.
+This limit helps prevent money laundering and ensures compliance with banking regulations.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -304,14 +338,24 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="11"
-                                    class="link-to-prism">libs/domain/src/account.ts:11</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="100"
+                                    class="link-to-prism">libs/domain/src/account.ts:100</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Deposits a specified amount into the account balance.
+This method validates that the deposit amount doesn&#39;t exceed the maximum allowed limit.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">```typescript
+const account = new Account();
+account.AccountBalance = 1000;
+account.Deposit(500); // Balance becomes 1500</code></pre></div><b>Example :</b><div><pre class="line-numbers"><code class="language-none">```html
+```typescript
+// This will throw an error
+const account = new Account();
+account.Deposit(15000); // Error: The input amount is greater than maximum allowed.</code></pre></div><b>Example :</b><div><pre class="line-numbers"><code class="language-none"></code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -322,6 +366,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -336,6 +381,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The amount to deposit into the account</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -373,14 +424,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="6"
-                                    class="link-to-prism">libs/domain/src/account.ts:6</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="73"
+                                    class="link-to-prism">libs/domain/src/account.ts:73</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Withdraws a specified amount from the account balance.
+This method validates that the withdrawal amount doesn&#39;t exceed the current balance.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">```typescript
+const account = new Account();
+account.AccountBalance = 1000;
+account.Withdraw(500); // Balance becomes 500</code></pre></div><b>Example :</b><div><pre class="line-numbers"><code class="language-none">```html
+```typescript
+// This will throw an error
+const account = new Account();
+account.AccountBalance = 100;
+account.Withdraw(200); // Error: The input amount is greater than balance.</code></pre></div><b>Example :</b><div><pre class="line-numbers"><code class="language-none"></code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -391,6 +453,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -405,6 +468,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The amount to withdraw from the account</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -431,15 +500,95 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export class Account {
+  /**
+   * Maximum amount allowed for a single deposit transaction.
+   * This limit helps prevent money laundering and ensures compliance with banking regulations.
+   * 
+   * @type {number}
+   * @default 10000
+   * @readonly
+   * @memberof Account
+   */
   public MAX_INPUT_AMOUNT: number &#x3D; 10000;
+
+  /**
+   * Unique identifier for the bank account.
+   * This number is used to identify the account in the banking system.
+   * 
+   * @type {number}
+   * @memberof Account
+   * @example
+   * &#x60;&#x60;&#x60;typescript
+   * const account &#x3D; new Account();
+   * account.AccountNumber &#x3D; 123456789;
+   * &#x60;&#x60;&#x60;
+   */
   public AccountNumber: number;
+
+  /**
+   * Current balance available in the account.
+   * Represents the amount of money currently available for transactions.
+   * 
+   * @type {number}
+   * @memberof Account
+   * @example
+   * &#x60;&#x60;&#x60;typescript
+   * const account &#x3D; new Account();
+   * account.AccountBalance &#x3D; 1000.50;
+   * console.log(&#x60;Balance: $${account.AccountBalance}&#x60;);
+   * &#x60;&#x60;&#x60;
+   */
   public AccountBalance: number;
 
+  /**
+   * Withdraws a specified amount from the account balance.
+   * This method validates that the withdrawal amount doesn&#x27;t exceed the current balance.
+   * 
+   * @param {number} amount - The amount to withdraw from the account
+   * @throws {Error} Throws an error if the withdrawal amount exceeds the account balance
+   * @memberof Account
+   * @example
+   * &#x60;&#x60;&#x60;typescript
+   * const account &#x3D; new Account();
+   * account.AccountBalance &#x3D; 1000;
+   * account.Withdraw(500); // Balance becomes 500
+   * &#x60;&#x60;&#x60;
+   * 
+   * @example
+   * &#x60;&#x60;&#x60;typescript
+   * // This will throw an error
+   * const account &#x3D; new Account();
+   * account.AccountBalance &#x3D; 100;
+   * account.Withdraw(200); // Error: The input amount is greater than balance.
+   * &#x60;&#x60;&#x60;
+   */
   public Withdraw(amount: number): void {
     if (amount &gt; this.AccountBalance)
       throw new Error(&#x27;The input amount is greater than balance.&#x27;);
     this.AccountBalance -&#x3D; amount;
   }
+
+  /**
+   * Deposits a specified amount into the account balance.
+   * This method validates that the deposit amount doesn&#x27;t exceed the maximum allowed limit.
+   * 
+   * @param {number} amount - The amount to deposit into the account
+   * @throws {Error} Throws an error if the deposit amount exceeds the maximum allowed amount
+   * @memberof Account
+   * @example
+   * &#x60;&#x60;&#x60;typescript
+   * const account &#x3D; new Account();
+   * account.AccountBalance &#x3D; 1000;
+   * account.Deposit(500); // Balance becomes 1500
+   * &#x60;&#x60;&#x60;
+   * 
+   * @example
+   * &#x60;&#x60;&#x60;typescript
+   * // This will throw an error
+   * const account &#x3D; new Account();
+   * account.Deposit(15000); // Error: The input amount is greater than maximum allowed.
+   * &#x60;&#x60;&#x60;
+   */
   public Deposit(amount: number): void {
     if (amount &gt; this.MAX_INPUT_AMOUNT)
       throw new Error(&#x27;The input amount is greater than maximum allowed.&#x27;);

@@ -123,6 +123,18 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <summary>
+  Represents an ATM (Automated Teller Machine) that executes a command.
+</summary>
+<remarks>
+  The ATM class uses the Command design pattern to perform actions.
+</remarks>
+
+            </p>
 
 
 
@@ -181,12 +193,17 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="4" class="link-to-prism">libs/domain/src/atm.ts:4</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">libs/domain/src/atm.ts:18</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><summary>
+  Initializes a new instance of the ATM class with a specific command.
+</summary>
+<param name="command">The command to associate with the ATM.</param>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -243,10 +260,19 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="4" class="link-to-prism">libs/domain/src/atm.ts:4</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">libs/domain/src/atm.ts:18</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><summary>
+  The command to be executed by the ATM.
+</summary>
+<type>ICommand</type>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -279,14 +305,19 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="8"
-                                    class="link-to-prism">libs/domain/src/atm.ts:8</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="36"
+                                    class="link-to-prism">libs/domain/src/atm.ts:36</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><summary>
+  Executes the associated command's action.
+</summary>
+<returns>void</returns>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -308,11 +339,39 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ICommand } from &#x27;./icommand.interface&#x27;;
 
+/**
+ * &lt;summary&gt;
+ *   Represents an ATM (Automated Teller Machine) that executes a command.
+ * &lt;/summary&gt;
+ * &lt;remarks&gt;
+ *   The ATM class uses the Command design pattern to perform actions.
+ * &lt;/remarks&gt;
+ */
 export class ATM {
+  /**
+   * &lt;summary&gt;
+   *   The command to be executed by the ATM.
+   * &lt;/summary&gt;
+   * &lt;type&gt;ICommand&lt;/type&gt;
+   */
   _command: ICommand;
+
+  /**
+   * &lt;summary&gt;
+   *   Initializes a new instance of the ATM class with a specific command.
+   * &lt;/summary&gt;
+   * &lt;param name&#x3D;&quot;command&quot;&gt;The command to associate with the ATM.&lt;/param&gt;
+   */
   constructor(command: ICommand) {
     this._command &#x3D; command;
   }
+
+  /**
+   * &lt;summary&gt;
+   *   Executes the associated command&#x27;s action.
+   * &lt;/summary&gt;
+   * &lt;returns&gt;void&lt;/returns&gt;
+   */
   public Action(): void {
     this._command.Execute();
   }

@@ -123,6 +123,16 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <summary>
+  Represents a command to deposit a specific amount into an account.
+</summary>
+<implements>ICommand</implements>
+
+            </p>
 
 
             <p class="comment">
@@ -189,12 +199,18 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">libs/domain/src/deposit-command.ts:6</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">libs/domain/src/deposit-command.ts:25</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><summary>
+  Initializes a new instance of the DepositCommand class.
+</summary>
+<param name="account">The account to deposit into.</param>
+<param name="amount">The amount to deposit.</param>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -263,10 +279,19 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="5" class="link-to-prism">libs/domain/src/deposit-command.ts:5</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">libs/domain/src/deposit-command.ts:17</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><summary>
+  The account where the deposit will be made.
+</summary>
+<type>Account</type>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -289,10 +314,19 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">libs/domain/src/deposit-command.ts:6</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">libs/domain/src/deposit-command.ts:25</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><summary>
+  The amount to deposit into the account.
+</summary>
+<type>number</type>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -323,14 +357,19 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="12"
-                                    class="link-to-prism">libs/domain/src/deposit-command.ts:12</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="45"
+                                    class="link-to-prism">libs/domain/src/deposit-command.ts:45</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><summary>
+  Executes the deposit action on the associated account.
+</summary>
+<returns>void</returns>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -353,14 +392,47 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Account } from &#x27;./account&#x27;;
 import { ICommand } from &#x27;./icommand.interface&#x27;;
 
+/**
+ * &lt;summary&gt;
+ *   Represents a command to deposit a specific amount into an account.
+ * &lt;/summary&gt;
+ * &lt;implements&gt;ICommand&lt;/implements&gt;
+ */
 export class DepositCommand implements ICommand {
+  /**
+   * &lt;summary&gt;
+   *   The account where the deposit will be made.
+   * &lt;/summary&gt;
+   * &lt;type&gt;Account&lt;/type&gt;
+   */
   _account: Account;
+
+  /**
+   * &lt;summary&gt;
+   *   The amount to deposit into the account.
+   * &lt;/summary&gt;
+   * &lt;type&gt;number&lt;/type&gt;
+   */
   _amount: number;
 
+  /**
+   * &lt;summary&gt;
+   *   Initializes a new instance of the DepositCommand class.
+   * &lt;/summary&gt;
+   * &lt;param name&#x3D;&quot;account&quot;&gt;The account to deposit into.&lt;/param&gt;
+   * &lt;param name&#x3D;&quot;amount&quot;&gt;The amount to deposit.&lt;/param&gt;
+   */
   constructor(account: Account, amount: number) {
     this._account &#x3D; account;
     this._amount &#x3D; amount;
   }
+
+  /**
+   * &lt;summary&gt;
+   *   Executes the deposit action on the associated account.
+   * &lt;/summary&gt;
+   * &lt;returns&gt;void&lt;/returns&gt;
+   */
   Execute(): void {
     this._account.Deposit(this._amount);
   }
