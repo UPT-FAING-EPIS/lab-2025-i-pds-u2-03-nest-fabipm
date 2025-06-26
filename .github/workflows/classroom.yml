@@ -27,7 +27,7 @@ jobs:
       uses: classroom-resources/autograding-command-grader@v1
       with:
         test-name: t2
-        setup-command: cd atm && npm run ci
+        setup-command: cd atm && npm ci
         command: cd atm && npm run test:cov
         timeout: 10
         max-score: 2
@@ -64,7 +64,7 @@ jobs:
       with:
         test-name: t6
         setup-command: ''
-        command: cat .github/workflows/package_nuget.yml | grep nuget
+        command: cat .github/workflows/package_npm.yml | grep npm
         timeout: 10
     - name: t7
       id: t7
