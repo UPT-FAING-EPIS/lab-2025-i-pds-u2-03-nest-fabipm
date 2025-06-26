@@ -52,7 +52,7 @@ jobs:
       - name: Create combined documentation structure
         run: |
           mkdir -p ./combined-docs
-          cp -r ./atm/documentation/* ./combined-docs/
+          cp -r ./atm/documentation/* ./combined-docs/atm/
           mkdir -p ./combined-docs/payment
           cp -r ./payment/documentation/* ./combined-docs/payment/
 
