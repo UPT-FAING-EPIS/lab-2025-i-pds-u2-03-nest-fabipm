@@ -52,8 +52,9 @@ jobs:
       - name: Create combined documentation structure
         run: |
           mkdir -p ./combined-docs
-          cp -r ./atm/documentation/* ./combined-docs/atm/
+          mkdir -p ./combined-docs/atm
           mkdir -p ./combined-docs/payment
+          cp -r ./atm/documentation/* ./combined-docs/atm/
           cp -r ./payment/documentation/* ./combined-docs/payment/
 
       - name: Create index page for combined docs
