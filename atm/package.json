@@ -76,5 +76,9 @@
     "moduleNameMapper": {
       "^@app/domain(|/.*)$": "<rootDir>/libs/domain/src/$1"
     }
+  },
+    "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UPT-FAING-EPIS/lab-2025-i-pds-u2-03-nest-fabipm.git"
   }
 }
