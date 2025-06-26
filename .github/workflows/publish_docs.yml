@@ -72,7 +72,7 @@ jobs:
           <body>
               <h1>Project Documentation</h1>
               <div class="project">
-                  <h2><a href="./index.html">ATM Documentation</a></h2>
+                  <h2><a href="./atm/index.html">ATM Documentation</a></h2>
                   <p>Documentation for the ATM project</p>
               </div>
               <div class="project">
